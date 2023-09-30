@@ -8,7 +8,7 @@ class Customer {
     private String customerAge;
     private List<Pet> purchasedPets;
 
-    public Customer(String name) {
+    public Customer(String customerId,String name, String customerGender,String customerAge) {
         this.name = name;
         this.customerId = customerId;
         this.customerGender = customerGender;
