@@ -14,7 +14,8 @@ public class PetManagementSystem {
             System.out.println("3. Add CustomerInfo");
             System.out.println("4. Show List of Customers");
             System.out.println("5. Selling a Pet to a Customer");
-            System.out.println("6. All are Done ....Exit.........");
+            System.out.println("6. Show the list of pets Purchased by a Customer");
+            System.out.println("7. All are Done ....Exit.........");
             System.out.print("Press the number that you want to do: ");
 
             int choice = scanner.nextInt();
@@ -41,7 +42,7 @@ public class PetManagementSystem {
                 System.out.print("Enter pet owner's name: ");
                 String owner = scanner.nextLine();
                 pets.add(new Pet(petId, petName, breed, age,petGender,petColor,petHeight,petweight, owner));
-                System.out.println("Pet with petId "+petId+ "is added successfully.");
+                System.out.println("Pet with petId "+petId+ " is added successfully.");
             }
             else if(choice==2){
                 System.out.println("List of Pets:");
@@ -65,7 +66,7 @@ public class PetManagementSystem {
                 System.out.print("Enter customer's Age: ");
                 String customerAge = scanner.nextLine();
                 customers.add(new Customer(customerId,customerName,customerGender,customerAge));
-                System.out.println("Customer with CustomerId "+customerId+"is added.");
+                System.out.println("Customer with CustomerId "+customerId+" is added.");
             }
             else if(choice==4){
                 System.out.println("List of Customers:");
@@ -101,6 +102,18 @@ public class PetManagementSystem {
                 }
             }
             else if(choice==6){
+                System.out.print("Enter the CustomerId: ");
+                String customerId = scanner.nextLine();
+                Customer perchasedCustomer = findCustomerById(customers, customerId);
+                if(perchasedCustomer.getPurchasedPets().size()==0){
+                    System.out.println("The customer with customerId "+customerId+" don't perchased anything..");
+                }
+                else{
+                    System.out.println(perchasedCustomer.getName()+"Perchased :"+perchasedCustomer.getPurchasedPets());
+                }
+                
+            }
+            else if(choice==7){
                  System.out.println("Exiting the program.");
                 scanner.close();
                 System.exit(0);
