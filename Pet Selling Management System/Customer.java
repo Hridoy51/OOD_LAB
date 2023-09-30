@@ -1,14 +1,15 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 class Customer {
+    //attributes.....
     private String customerId;
     private String name;
     private String customerGender;
-    private String customerAge;
+    private int customerAge;
     private List<Pet> purchasedPets;
-
-    public Customer(String customerId,String name, String customerGender,String customerAge) {
+    
+    //constructor.....
+    public Customer(String customerId,String name, String customerGender,int customerAge) {
         this.name = name;
         this.customerId = customerId;
         this.customerGender = customerGender;
@@ -16,22 +17,32 @@ class Customer {
         this.purchasedPets = new ArrayList<>();
     }
 
+    //getting a customer name 
     public String getName() {
         return name;
     }
+
+    //getting customer id..
     public String getCustomerId() {
         return customerId;
     }
+
+    //getting customer gender
     public String getCustomerGender() {
         return customerGender;
     }
-    public String getCustomerAge() {
+
+    //gtting customers age..
+    public int getCustomerAge() {
         return customerAge;
     }
+
+    //getting purchased list of a customers..
     public List<Pet> getPurchasedPets() {
         return purchasedPets;
     }
 
+    //add purchased pet to the list..
     public void purchasePet(Pet pet) {
         purchasedPets.add(pet);
     }
