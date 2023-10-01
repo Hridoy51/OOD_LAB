@@ -147,12 +147,18 @@ public class PetSellingManagementSystem {
                     System.out.print("Enter the CustomerId: ");
                     String customerId = scanner.nextLine();
                     Customer perchasedCustomer = findCustomerById(customers, customerId);
-                    if(perchasedCustomer.getPurchasedPets().size()==0){//if no perchased has done...
-                        System.out.println("The customer with customerId "+customerId+" don't perchased anything..");
+                    if(perchasedCustomer!=null){
+                        if(perchasedCustomer.getPurchasedPets().size()==0){//if no perchased has done...
+                            System.out.println("The customer with customerId "+customerId+" don't perchased anything..");
+                        }
+                        else{
+                            System.out.println(perchasedCustomer.getName()+"Perchased :"+perchasedCustomer.getPurchasedPets());
+                        }
                     }
                     else{
-                        System.out.println(perchasedCustomer.getName()+"Perchased :"+perchasedCustomer.getPurchasedPets());
+                        System.out.println("Customer Not Found!!!");
                     }
+                    
                     
                 }
                 //exiting application....
