@@ -7,8 +7,15 @@ public class PetSellingManagementSystem {
         List<Pet> pets = new ArrayList<>();//creating pet inventory
         List<Customer> customers = new ArrayList<>();//creating customer array
 
-        try {
-            while (true) {
+        int mainMenu;
+        while (true) {
+            System.out.println();
+            System.out.print("Type '0' to Get the main MENU: ");
+            mainMenu = scanner.nextInt();
+            scanner.nextLine();
+
+            try {
+                if(mainMenu == 0){
                 //Alternative of user interface
                 System.out.println("Options : ");
                 System.out.println("1. Add PetInfo");
@@ -38,25 +45,35 @@ public class PetSellingManagementSystem {
                     System.out.print("Enter pet's Color: ");//white,,black etc
                     String petColor = scanner.nextLine();
                     System.out.print("Enter pet's Height: ");
-                    double petHeight = scanner.nextDouble();
+                    double petHeight = scanner.nextDouble(); 
                     System.out.print("Enter pet's Weight: ");
-                    double petweight = scanner.nextDouble();
+                    double petweight = scanner.nextDouble(); 
                     System.out.print("Enter pet's age: ");
                     int age = scanner.nextInt();
-                    scanner.nextLine(); // read the newline
+                    scanner.nextLine(); // read the newline 
                     System.out.print("Enter pet owner's name: ");
                     String owner = scanner.nextLine();
+
                     //add to the inventory...
-                    pets.add(new Pet(petId,animalSpecis, petName, breed, age,petGender,petColor,petHeight,petweight, owner));
-                    System.out.println("Pet with petId "+petId+ " is added successfully.");
+                    Pet addPet = findPetById(pets, petId);
+                    if(addPet==null){
+                        pets.add(new Pet(petId,animalSpecis, petName, breed, age,petGender,petColor,petHeight,petweight, owner));
+                        System.out.println("Pet with petId "+petId+ " is added successfully.");
+                    }
+                    else{
+                        System.out.println("Two pets Shouldn't have same ID..try new");
+                        continue;
+                    }
+                    
                 }
                 //show the inventory..
                 else if(choice==2){
-                    System.out.println("List of Pets:");
+                    System.out.print("List of Pets: ");
                     if(pets.size()==0){
                         System.out.println("No Pet found!!!!!!");//if no pets in inventory..
                     }
                     else{
+                        System.out.println();
                         for (Pet pet : pets) {
                             System.out.println(pet);
                         }
@@ -73,17 +90,28 @@ public class PetSellingManagementSystem {
                     String customerGender = scanner.nextLine();
                     System.out.print("Enter customer's Age: ");
                     int customerAge = scanner.nextInt();
+                    scanner.nextLine();
+                   
+                    
                     //added the customer info to the customers list...
-                    customers.add(new Customer(customerId,customerName,customerGender,customerAge));
-                    System.out.println("Customer with CustomerId "+customerId+" is added.");
+                    Customer addCustomer = findCustomerById(customers, customerId);
+                    if(addCustomer==null){
+                        customers.add(new Customer(customerId,customerName,customerGender,customerAge));
+                        System.out.println("Customer with CustomerId "+customerId+" is added.");
+                    }
+                    else{
+                        System.out.println("Two Customers Shouldn't have same ID..try new");
+                    }
+                    
                 }
                 //show the list of customers...
                 else if(choice==4){
-                    System.out.println("List of Customers:");
+                    System.out.print("List of Customers: ");
                     if(customers.size()==0){
                         System.out.println("No Customer Found!!!!!");
                     }
                     else{
+                        System.out.println();
                         for (Customer customer : customers) {
                             System.out.println(customer);
                         }
@@ -138,10 +166,12 @@ public class PetSellingManagementSystem {
                     System.out.println("Invalid choice. Try again.");
                 }             
             }
-        } catch (Exception e) {
-            System.out.println("There maybe some mistake in your input..");
-
+            } catch (Exception e) {
+                System.out.println("There is data type error in your input..try again..");
+                continue;
+            }
         }
+        
     }
 
     //find a pet by it's id....
